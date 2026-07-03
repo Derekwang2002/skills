@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Eval"
+  short_description: "Run reusable agent review and fixer loops from a CLI."
+  default_prompt: "Use $agent-eval to review the current repository diff."
