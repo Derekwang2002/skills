@@ -54,9 +54,9 @@
     .hero {
       min-height: 88vh;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+      grid-template-columns: minmax(320px, .58fr) minmax(720px, 1.42fr);
       gap: 28px;
-      align-items: center;
+      align-items: start;
       padding: 28px 0 18px;
     }
 
@@ -179,6 +179,14 @@
       box-shadow: var(--shadow);
       border-radius: var(--radius);
       overflow: hidden;
+    }
+
+    .lab-cluster {
+      display: grid;
+      grid-template-columns: minmax(420px, 1fr) minmax(300px, 350px);
+      gap: 14px;
+      align-items: start;
+      padding-top: 6px;
     }
 
     .machine {
@@ -342,15 +350,14 @@
 
     .main-grid {
       display: grid;
-      grid-template-columns: minmax(320px, 440px) minmax(0, 1fr);
+      grid-template-columns: 1fr;
       gap: 18px;
       align-items: start;
       margin: 18px 0 42px;
     }
 
     .controls {
-      position: sticky;
-      top: 16px;
+      align-self: start;
     }
 
     .section-head {
@@ -981,7 +988,7 @@
         font-size: 72px;
       }
 
-      .hero, .main-grid, .complexity, .deep-grid, .range-scan {
+      .hero, .lab-cluster, .main-grid, .complexity, .deep-grid, .range-scan {
         grid-template-columns: 1fr;
       }
 
@@ -1069,31 +1076,30 @@
         </div>
       </div>
 
-      <div class="panel machine" aria-label="跳表动态图">
-        <div class="machine-top">
-          <div class="machine-title">LIVE STRUCTURE</div>
-          <div class="signal" id="heroSignal">ready</div>
-        </div>
-        <div class="viz-wrap">
-          <svg id="skipSvg" role="img" aria-label="动态跳表结构图"></svg>
-        </div>
-        <div class="machine-bottom">
-          <div class="metric">
-            <b>expected height</b>
-            <span id="heightMetric">log₂ n</span>
-            <small>高度由连续抛硬币决定。</small>
+      <div class="lab-cluster" id="playground">
+        <div class="panel machine" aria-label="跳表动态图">
+          <div class="machine-top">
+            <div class="machine-title">LIVE STRUCTURE</div>
+            <div class="signal" id="heroSignal">ready</div>
           </div>
-          <div class="metric">
-            <b>search path</b>
-            <span id="pathMetric">0 hops</span>
-            <small>横向跳跃 + 向下收窄。</small>
+          <div class="viz-wrap">
+            <svg id="skipSvg" role="img" aria-label="动态跳表结构图"></svg>
+          </div>
+          <div class="machine-bottom">
+            <div class="metric">
+              <b>expected height</b>
+              <span id="heightMetric">log₂ n</span>
+              <small>高度由连续抛硬币决定。</small>
+            </div>
+            <div class="metric">
+              <b>search path</b>
+              <span id="pathMetric">0 hops</span>
+              <small>横向跳跃 + 向下收窄。</small>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="main-grid" id="playground">
-      <aside class="panel controls">
+        <aside class="panel controls">
         <div class="section-head">
           <h2>实验台</h2>
           <p>调整概率、最大层数和目标值，观察路径如何从最高层逐级逼近。</p>
@@ -1159,7 +1165,10 @@
           </div>
         </div>
       </aside>
+      </div>
+    </section>
 
+    <section class="main-grid">
       <div class="content-stack">
         <article class="chapter">
           <div class="chapter-header">
