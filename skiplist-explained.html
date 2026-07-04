@@ -98,6 +98,34 @@
 
     .hero strong { color: var(--ink); }
 
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 720px;
+      margin-top: 28px;
+    }
+
+    .proof-cell {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 12px;
+      box-shadow: 5px 5px 0 rgba(27, 26, 23, .10);
+    }
+
+    .proof-cell b {
+      display: block;
+      font: 900 18px/1 "JetBrains Mono", monospace;
+      margin-bottom: 8px;
+    }
+
+    .proof-cell span {
+      color: var(--muted);
+      font-size: 13px;
+      display: block;
+    }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
@@ -208,6 +236,17 @@
       background-size: 28px 28px;
     }
 
+    .viz-wrap::after {
+      content: "sentinel head -> sparse express lanes -> dense base list";
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      max-width: calc(100% - 28px);
+      color: rgba(27, 26, 23, .42);
+      font: 700 11px/1.2 "JetBrains Mono", monospace;
+      pointer-events: none;
+    }
+
     #skipSvg {
       width: 100%;
       height: 100%;
@@ -233,6 +272,12 @@
       stroke-width: 5;
       opacity: 1;
       filter: drop-shadow(0 0 5px rgba(216,79,53,.3));
+    }
+
+    .lane-band {
+      fill: rgba(255, 253, 247, .56);
+      stroke: rgba(27, 26, 23, .08);
+      stroke-width: 1;
     }
 
     .tower {
@@ -401,6 +446,36 @@
       white-space: pre-wrap;
     }
 
+    .legend {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      background: #fffdf7;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 12px;
+      border: 2px solid var(--ink);
+      border-radius: 3px;
+      display: block;
+    }
+
+    .swatch.green { background: #bce2ce; }
+    .swatch.red { background: #ffd1c4; }
+    .swatch.gold { background: #ffe3a4; }
+
     .content-stack {
       display: grid;
       gap: 18px;
@@ -479,6 +554,147 @@
     .note.accent-blue { border-top: 8px solid var(--blue); }
     .note.accent-violet { border-top: 8px solid var(--violet); }
     .note.accent-gold { border-top: 8px solid var(--gold); }
+
+    .deep-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .diagram {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(90deg, rgba(27,26,23,.04) 1px, transparent 1px),
+        linear-gradient(rgba(27,26,23,.035) 1px, transparent 1px),
+        #fffdf7;
+      background-size: 20px 20px;
+      padding: 16px;
+      min-height: 260px;
+    }
+
+    .diagram h3 {
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .diagram p,
+    .scan-line p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .memory-node {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--paper-2);
+      box-shadow: 5px 5px 0 rgba(27, 26, 23, .10);
+    }
+
+    .memory-key {
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--paper-2);
+      font: 900 28px/1 "JetBrains Mono", monospace;
+      min-height: 168px;
+    }
+
+    .forward-stack {
+      display: grid;
+    }
+
+    .slot {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      align-items: center;
+      min-height: 42px;
+      border-bottom: 2px solid var(--ink);
+      font: 700 12px/1 "JetBrains Mono", monospace;
+    }
+
+    .slot:last-child { border-bottom: 0; }
+
+    .slot span:first-child {
+      padding-left: 10px;
+      color: var(--muted);
+    }
+
+    .pointer {
+      position: relative;
+      height: 2px;
+      background: var(--red);
+      margin-right: 28px;
+    }
+
+    .pointer::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      top: -5px;
+      border-left: 10px solid var(--red);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .coin-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .coin-row {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      font: 700 12px/1 "JetBrains Mono", monospace;
+    }
+
+    .coin-track {
+      height: 26px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fbf5e7;
+      overflow: hidden;
+    }
+
+    .coin-fill {
+      height: 100%;
+      background: repeating-linear-gradient(135deg, var(--green) 0 10px, #49a487 10px 20px);
+    }
+
+    .invariant-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .invariant {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 12px;
+      min-height: 128px;
+    }
+
+    .invariant b {
+      display: block;
+      font: 900 13px/1.2 "JetBrains Mono", monospace;
+      margin-bottom: 8px;
+    }
+
+    .invariant p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
 
     .timeline {
       display: grid;
@@ -609,6 +825,87 @@
       color: var(--muted);
     }
 
+    .hardcore {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .hardcore-card {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 14px;
+      min-height: 172px;
+    }
+
+    .hardcore-card code {
+      display: inline-block;
+      background: #201f1b;
+      color: #f7eddc;
+      border-radius: 5px;
+      padding: 2px 6px;
+      font: 700 12px/1.4 "JetBrains Mono", monospace;
+    }
+
+    .hardcore-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .hardcore-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .range-scan {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .scan-line {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 16px;
+    }
+
+    .scan-nodes {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 12px 0 4px;
+    }
+
+    .scan-node {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      background: var(--paper-2);
+      font: 900 12px/1 "JetBrains Mono", monospace;
+    }
+
+    .scan-node.hot {
+      background: #bce2ce;
+      border-color: var(--green);
+    }
+
+    .scan-arrow {
+      flex: 0 0 auto;
+      color: var(--red);
+      font: 900 18px/1 "JetBrains Mono", monospace;
+    }
+
     .philosophy {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -684,7 +981,7 @@
         font-size: 72px;
       }
 
-      .hero, .main-grid, .complexity {
+      .hero, .main-grid, .complexity, .deep-grid, .range-scan {
         grid-template-columns: 1fr;
       }
 
@@ -709,6 +1006,9 @@
 
       .machine-bottom,
       .explain-grid,
+      .hero-proof,
+      .invariant-grid,
+      .hardcore,
       .philosophy {
         grid-template-columns: 1fr;
       }
@@ -742,6 +1042,20 @@
           跳表把一个有序链表升级成多层“快速通道”：底层保存全部元素，上层用随机抽样留下稀疏索引。
           它用很少的局部指针维护，换来接近平衡树的 <strong>O(log n)</strong> 搜索、插入和删除。
         </p>
+        <div class="hero-proof" aria-label="跳表关键公式">
+          <div class="proof-cell">
+            <b>P(H ≥ k)=p^k</b>
+            <span>节点能站到第 k 层的概率按指数衰减。</span>
+          </div>
+          <div class="proof-cell">
+            <b>E[n_k]=n·p^k</b>
+            <span>第 k 层的期望节点数自然变稀疏。</span>
+          </div>
+          <div class="proof-cell">
+            <b>update[i]</b>
+            <span>插入和删除只改搜索路径附近的前驱指针。</span>
+          </div>
+        </div>
         <div class="hero-actions">
           <a class="btn" href="#playground" aria-label="进入互动演示">
             <span aria-hidden="true">▶</span> 互动演示
@@ -837,6 +1151,12 @@
           </div>
 
           <div class="console" id="console">选择一个目标值，然后点击“搜索”或“单步”。</div>
+
+          <div class="legend" aria-label="动画图例">
+            <div class="legend-item"><span class="swatch red"></span><span>红色：当前比较/跳跃路径</span></div>
+            <div class="legend-item"><span class="swatch green"></span><span>绿色：命中节点</span></div>
+            <div class="legend-item"><span class="swatch gold"></span><span>黄色：刚插入的新塔</span></div>
+          </div>
         </div>
       </aside>
 
@@ -862,6 +1182,50 @@
               <div class="note accent-blue">
                 <h3>搜索像下楼梯</h3>
                 <p>从最高层 head 出发，能向右就向右，下一步会越过目标时向下。路径单调前进，不会回头。</p>
+              </div>
+            </div>
+            <div class="deep-grid">
+              <div class="diagram">
+                <h3>节点内存布局：一座塔就是一个 forward 数组</h3>
+                <div class="memory-node" aria-label="节点 forward 数组示意">
+                  <div class="memory-key">42</div>
+                  <div class="forward-stack">
+                    <div class="slot"><span>forward[3]</span><span class="pointer"></span></div>
+                    <div class="slot"><span>forward[2]</span><span class="pointer"></span></div>
+                    <div class="slot"><span>forward[1]</span><span class="pointer"></span></div>
+                    <div class="slot"><span>forward[0]</span><span class="pointer"></span></div>
+                  </div>
+                </div>
+                <p>节点高度不是全局数组，而是节点自己的指针数组长度。高节点更少，所以总指针数期望为 n / (1-p)。</p>
+              </div>
+              <div class="diagram">
+                <h3>随机晋升：连续成功才继续升层</h3>
+                <div class="coin-stack" aria-label="随机晋升概率示意">
+                  <div class="coin-row"><span>L0</span><span class="coin-track"><span class="coin-fill" style="width:100%"></span></span></div>
+                  <div class="coin-row"><span>L1</span><span class="coin-track"><span class="coin-fill" style="width:50%"></span></span></div>
+                  <div class="coin-row"><span>L2</span><span class="coin-track"><span class="coin-fill" style="width:25%"></span></span></div>
+                  <div class="coin-row"><span>L3</span><span class="coin-track"><span class="coin-fill" style="width:12.5%"></span></span></div>
+                  <div class="coin-row"><span>L4</span><span class="coin-track"><span class="coin-fill" style="width:6.25%"></span></span></div>
+                </div>
+                <p>若 p=0.5，能到 L4 的节点大约只有 1/16。跳表靠这种几何分布形成“少数高塔，多数矮塔”。</p>
+              </div>
+            </div>
+            <div class="invariant-grid" aria-label="跳表不变量">
+              <div class="invariant">
+                <b>Invariant 1</b>
+                <p>每一层都是按 key 递增的链表，且高层链表是低层链表的子序列。</p>
+              </div>
+              <div class="invariant">
+                <b>Invariant 2</b>
+                <p>head 拥有最大层数，作为所有层的哨兵，避免边界分支散落在代码里。</p>
+              </div>
+              <div class="invariant">
+                <b>Invariant 3</b>
+                <p>搜索指针只向右或向下移动，因此访问过的位置不会再次访问。</p>
+              </div>
+              <div class="invariant">
+                <b>Invariant 4</b>
+                <p>更新只依赖每层前驱 update[i]，不会触碰与搜索路径无关的节点。</p>
               </div>
             </div>
           </div>
@@ -895,6 +1259,24 @@
               <div>
                 <h3>Delete：复用前驱数组，拆掉塔</h3>
                 <p>若 L0 的候选节点就是目标，在它出现的每一层执行 update[i].forward[i] = target.forward[i]。</p>
+              </div>
+            </div>
+            <div class="range-scan">
+              <div class="scan-line">
+                <h3>范围扫描：先定位左边界，再沿 L0 线性输出</h3>
+                <p>跳表的随机索引只用于快速找到 start。找到第一个 key ≥ start 的节点后，后续 [start, end] 区间直接沿 L0 next 指针顺序走，天然保持排序。</p>
+              </div>
+              <div class="scan-line">
+                <h3>L0 是真正的数据平面</h3>
+                <div class="scan-nodes" aria-label="范围扫描示意">
+                  <span class="scan-node">23</span><span class="scan-arrow">→</span>
+                  <span class="scan-node hot">31</span><span class="scan-arrow">→</span>
+                  <span class="scan-node hot">37</span><span class="scan-arrow">→</span>
+                  <span class="scan-node hot">42</span><span class="scan-arrow">→</span>
+                  <span class="scan-node hot">48</span><span class="scan-arrow">→</span>
+                  <span class="scan-node">55</span>
+                </div>
+                <p>这也是 Redis ZSet、LSM memtable 这类场景喜欢跳表的原因：点查像树，顺序扫描像链表。</p>
               </div>
             </div>
           </div>
@@ -934,6 +1316,20 @@
               <p>p 越大，高层节点越多，索引更密但空间更高；p 越小，高层更稀疏，空间省但横向跳跃可能变多。</p>
               <p>常用 p=0.5 或 p=0.25。p=0.5 直观、实现简单；p=0.25 指针更少，常见于内存敏感场景。</p>
               <p><strong>期望复杂度：</strong>search / insert / delete 都是 O(log n)，空间是 O(n)。极端随机序列会退化，但概率很低。</p>
+            </div>
+            <div class="hardcore" aria-label="复杂度细节">
+              <div class="hardcore-card">
+                <h3>为什么不是 O(n)</h3>
+                <p>在第 k 层，节点密度约为 <code>p^k</code>。搜索先在稀疏层跨大段区间，再逐层细化；每层期望横向移动是常数级。</p>
+              </div>
+              <div class="hardcore-card">
+                <h3>高度上界怎么选</h3>
+                <p>工程里通常令 <code>maxLevel ≈ log1/p(N)</code>。例如 N 约 2^32 且 p=0.25 时，32 层已经非常宽裕。</p>
+              </div>
+              <div class="hardcore-card">
+                <h3>随机数的工程含义</h3>
+                <p>随机高度不要求密码学安全，但要避免低位质量太差。生产实现常用快速 PRNG，并把层高生成写成可测试函数。</p>
+              </div>
             </div>
           </div>
         </article>
@@ -1214,6 +1610,29 @@ class SkipList {
       svg.setAttribute("viewBox", `0 0 ${data.width} ${data.height}`);
       svg.innerHTML = "";
 
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      defs.innerHTML = `
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#7a6f5e"></path>
+        </marker>
+        <marker id="arrowHot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#d84f35"></path>
+        </marker>
+      `;
+      svg.appendChild(defs);
+
+      for (let level = data.activeMax; level >= 0; level--) {
+        const y = data.top + (data.activeMax - level) * data.rowGap;
+        const band = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        band.setAttribute("x", 8);
+        band.setAttribute("y", y - 23);
+        band.setAttribute("width", data.width - 16);
+        band.setAttribute("height", 46);
+        band.setAttribute("rx", 6);
+        band.setAttribute("class", "lane-band");
+        svg.appendChild(band);
+      }
+
       for (let level = data.activeMax; level >= 0; level--) {
         const y = data.top + (data.activeMax - level) * data.rowGap;
         const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -1252,6 +1671,7 @@ class SkipList {
           edge.setAttribute("x2", to.x - data.nodeW / 2);
           edge.setAttribute("y2", to.y);
           edge.setAttribute("class", edgeKey(level, value, next) === state.activeEdge ? "edge hot" : "edge");
+          edge.setAttribute("marker-end", edgeKey(level, value, next) === state.activeEdge ? "url(#arrowHot)" : "url(#arrow)");
           svg.appendChild(edge);
         });
       }
