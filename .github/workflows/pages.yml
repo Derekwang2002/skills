@@ -31,7 +31,9 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp .nojekyll index.html skiplist-explained.html _site/
+          cp .nojekyll _site/
+          cp -R leetcode-cookbook/. _site/
+          find _site -name ".DS_Store" -delete
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
