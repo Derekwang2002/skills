@@ -3,13 +3,349 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=skiplist-explained.html">
-  <title>Skip List 跳表讲解</title>
-  <script>
-    window.location.replace("skiplist-explained.html");
-  </script>
+  <title>LeetCode Cookbook：数据结构可视化讲解</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap");
+
+    :root {
+      --paper: #f8f4e9;
+      --paper-2: #fffaf0;
+      --ink: #1b1a17;
+      --muted: #666052;
+      --line: #d7cbb7;
+      --red: #d84f35;
+      --green: #18795f;
+      --blue: #2457a6;
+      --gold: #d99c23;
+      --shadow: 0 20px 60px rgba(47, 39, 24, .15);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        linear-gradient(90deg, rgba(27, 26, 23, .035) 1px, transparent 1px),
+        linear-gradient(rgba(27, 26, 23, .025) 1px, transparent 1px),
+        repeating-linear-gradient(112deg, rgba(216, 79, 53, .07) 0 2px, transparent 2px 19px),
+        repeating-linear-gradient(24deg, rgba(24, 121, 95, .055) 0 1px, transparent 1px 23px),
+        var(--paper);
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      color: var(--green);
+      font: 700 13px/1 "JetBrains Mono", monospace;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--green);
+      padding-bottom: 8px;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+    }
+
+    h1, h2 {
+      font-family: "IBM Plex Serif", "Noto Sans SC", serif;
+      line-height: 1.05;
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 84px;
+      max-width: none;
+      white-space: nowrap;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .intro p {
+      margin: 18px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .summary {
+      max-width: 420px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      box-shadow: 6px 6px 0 rgba(27, 26, 23, .10);
+      padding: 16px;
+    }
+
+    .summary b {
+      display: block;
+      font: 900 13px/1 "JetBrains Mono", monospace;
+      margin-bottom: 10px;
+    }
+
+    .summary span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 360px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: rgba(255, 250, 240, .92);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 13px 13px 0 rgba(27, 26, 23, .10), var(--shadow);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid var(--ink);
+      background: #25231f;
+      color: var(--paper-2);
+      padding: 14px 16px;
+      font: 800 13px/1 "JetBrains Mono", monospace;
+    }
+
+    .status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 6px rgba(217, 156, 35, .18);
+    }
+
+    .card-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .card h2 {
+      font-size: 34px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .proofs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .proof {
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      background: #fffdf7;
+      padding: 10px;
+      min-height: 78px;
+    }
+
+    .proof b {
+      display: block;
+      font: 900 14px/1 "JetBrains Mono", monospace;
+      margin-bottom: 8px;
+    }
+
+    .proof span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      display: block;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-top: 2px solid var(--ink);
+      padding: 14px 16px;
+      background: #fffdf7;
+      font: 900 13px/1 "JetBrains Mono", monospace;
+    }
+
+    .arrow {
+      color: var(--red);
+      font-size: 18px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 2px solid var(--ink);
+      margin-top: 30px;
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .intro,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 64px;
+      }
+
+      .summary {
+        max-width: 520px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 22px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .card h2 {
+        font-size: 28px;
+      }
+
+      .proofs,
+      .footer {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+    }
+  </style>
 </head>
 <body>
-  <a href="skiplist-explained.html">打开 Skip List 跳表讲解</a>
+  <main class="page">
+    <section class="intro" aria-labelledby="pageTitle">
+      <div>
+        <div class="kicker">leetcode cookbook / visual explainers</div>
+        <h1 id="pageTitle">数据结构可视化讲解</h1>
+        <p>
+          两个交互式单页：跳表讲有序索引如何用概率形成快速通道；LRU Cache 讲缓存如何用 HashMap 和双向链表维护最近使用顺序。
+        </p>
+      </div>
+      <div class="summary">
+        <b>INDEX</b>
+        <span>适合复习机制、复杂度、实现方式和工程取舍。每个页面都包含动态演示、Java/伪代码片段和结构图。</span>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="讲解页面入口">
+      <a class="card" href="skiplist-explained.html">
+        <div class="card-top">
+          <span>PROBABILISTIC INDEX</span>
+          <span class="status" aria-hidden="true"></span>
+        </div>
+        <div class="card-body">
+          <h2>Skip List 跳表</h2>
+          <p>用多层有序链表模拟平衡索引：底层保存全部元素，上层随机抽样形成稀疏快速通道。</p>
+          <div class="proofs" aria-label="跳表关键点">
+            <div class="proof">
+              <b>O(log n)</b>
+              <span>搜索、插入、删除期望复杂度。</span>
+            </div>
+            <div class="proof">
+              <b>p^k</b>
+              <span>层高按几何概率递减。</span>
+            </div>
+            <div class="proof">
+              <b>update[]</b>
+              <span>插入删除只改局部前驱指针。</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>打开跳表讲解</span>
+          <span class="arrow">-></span>
+        </div>
+      </a>
+
+      <a class="card" href="lru-cache-explained.html">
+        <div class="card-top">
+          <span>CACHE EVICTION POLICY</span>
+          <span class="status" aria-hidden="true"></span>
+        </div>
+        <div class="card-body">
+          <h2>LRU Cache</h2>
+          <p>用 HashMap 负责 O(1) 定位，用双向链表负责 O(1) 调整新旧顺序，容量满时淘汰最冷节点。</p>
+          <div class="proofs" aria-label="LRU 关键点">
+            <div class="proof">
+              <b>get O(1)</b>
+              <span>命中后移动到队头。</span>
+            </div>
+            <div class="proof">
+              <b>put O(1)</b>
+              <span>更新或插入后刷新热度。</span>
+            </div>
+            <div class="proof">
+              <b>concurrency</b>
+              <span>比较整表锁、分片和近似 LRU。</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span>打开 LRU 讲解</span>
+          <span class="arrow">-></span>
+        </div>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <span>LeetCode Cookbook visual index</span>
+      <span>skip list / lru cache</span>
+    </footer>
+  </main>
 </body>
 </html>

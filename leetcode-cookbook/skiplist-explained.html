@@ -28,6 +28,7 @@
     html {
       scroll-behavior: smooth;
       background: var(--paper);
+      overflow-x: clip;
     }
 
     body {
@@ -35,6 +36,7 @@
       color: var(--ink);
       font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
+      overflow-x: clip;
       background:
         linear-gradient(90deg, rgba(27, 26, 23, .035) 1px, transparent 1px),
         linear-gradient(rgba(27, 26, 23, .025) 1px, transparent 1px),
@@ -49,23 +51,33 @@
     .page {
       width: min(1500px, calc(100% - 32px));
       margin: 0 auto;
+      overflow: visible;
     }
 
     .hero {
       min-height: auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 18px;
       align-items: start;
-      padding: 26px 0 36px;
+      padding: 24px 0 36px;
+      min-width: 0;
+    }
+
+    .hero-title {
+      display: grid;
+      justify-items: center;
+      gap: 16px;
+      text-align: center;
+      padding: 4px 0 2px;
     }
 
     .hero-copy {
       display: grid;
-      grid-template-columns: minmax(280px, 430px) minmax(0, 1fr);
-      gap: 14px 28px;
-      align-items: end;
-      padding: 0;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 2px 0 0;
     }
 
     .kicker {
@@ -78,7 +90,6 @@
       border-bottom: 2px solid var(--green);
       padding-bottom: 8px;
       letter-spacing: 0;
-      grid-column: 1 / -1;
       width: max-content;
     }
 
@@ -90,19 +101,17 @@
     }
 
     h1 {
-      font-size: 72px;
-      max-width: 430px;
-      margin-top: 6px;
-      grid-column: 1;
-      grid-row: 2 / span 3;
+      font-size: clamp(56px, 8vw, 116px);
+      max-width: none;
+      margin-top: 0;
+      text-align: center;
     }
 
     .hero p {
       font-size: 16px;
       color: var(--muted);
-      max-width: 760px;
+      max-width: 1180px;
       margin: 0;
-      grid-column: 2;
     }
 
     .hero strong { color: var(--ink); }
@@ -111,9 +120,9 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
+      width: 100%;
       max-width: none;
-      margin-top: 0;
-      grid-column: 2;
+      margin-top: 2px;
     }
 
     .proof-cell {
@@ -122,6 +131,7 @@
       background: #fffdf7;
       padding: 12px;
       box-shadow: 5px 5px 0 rgba(27, 26, 23, .10);
+      text-align: left;
     }
 
     .proof-cell b {
@@ -134,14 +144,6 @@
       color: var(--muted);
       font-size: 13px;
       display: block;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 0;
-      grid-column: 2;
     }
 
     .btn {
@@ -190,20 +192,24 @@
       box-shadow: var(--shadow);
       border-radius: var(--radius);
       overflow: hidden;
+      min-width: 0;
     }
 
     .lab-cluster {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 360px;
+      grid-template-columns: 250px minmax(0, 1fr);
       gap: 18px;
-      align-items: start;
+      align-items: stretch;
       padding-top: 0;
+      min-width: 0;
     }
 
     .machine {
+      grid-column: 2;
       min-height: 540px;
       display: grid;
       grid-template-rows: auto minmax(320px, 1fr) auto;
+      min-width: 0;
     }
 
     .machine-top {
@@ -228,6 +234,9 @@
       color: #f3d27a;
       font: 700 12px/1 "JetBrains Mono", monospace;
       white-space: nowrap;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .signal::before {
@@ -248,6 +257,9 @@
     .viz-wrap {
       position: relative;
       min-height: 360px;
+      overflow: hidden;
+      min-width: 0;
+      max-width: 100%;
       background:
         linear-gradient(90deg, rgba(27,26,23,.06) 1px, transparent 1px),
         linear-gradient(rgba(27,26,23,.05) 1px, transparent 1px),
@@ -359,26 +371,23 @@
       margin-top: 8px;
     }
 
-    .main-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      align-items: start;
-      margin: 18px 0 42px;
-    }
-
     .controls {
+      grid-column: 1;
+      grid-row: 1;
       align-self: start;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-width: 0;
     }
 
     .section-head {
-      padding: 18px 18px 14px;
+      padding: 14px 14px 12px;
       border-bottom: 2px solid var(--ink);
       background: var(--paper-2);
     }
 
     .section-head h2 {
-      font-size: 24px;
+      font-size: 22px;
     }
 
     .section-head p {
@@ -388,9 +397,10 @@
     }
 
     .control-body {
-      padding: 18px;
+      padding: 14px;
       display: grid;
-      gap: 18px;
+      gap: 14px;
+      align-content: start;
     }
 
     .field {
@@ -449,8 +459,8 @@
 
     .button-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: 1fr;
+      gap: 8px;
     }
 
     .console {
@@ -458,7 +468,7 @@
       color: #f7eddc;
       border-radius: var(--radius);
       padding: 14px;
-      min-height: 128px;
+      min-height: 96px;
       font: 13px/1.6 "JetBrains Mono", monospace;
       border: 2px solid var(--ink);
       white-space: pre-wrap;
@@ -497,6 +507,110 @@
     .content-stack {
       display: grid;
       gap: 18px;
+      margin: 18px 0 42px;
+      min-width: 0;
+      overflow: visible;
+    }
+
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+      overflow: visible;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px;
+      margin: 18px 0 42px;
+      padding: 10px 14px 10px 0;
+      border-right: 2px solid var(--line);
+      position: -webkit-sticky;
+      position: sticky;
+      top: 18px;
+      align-self: start;
+      z-index: 2;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .toc::before {
+      content: "目录";
+      display: block;
+      color: var(--muted);
+      font: 900 12px/1 "Noto Sans SC", sans-serif;
+      margin: 0 0 8px;
+    }
+
+    .toc-card {
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      padding: 8px 10px;
+      min-height: 0;
+      text-decoration: none;
+      box-shadow: none;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .toc-card:hover {
+      background: rgba(27, 26, 23, .06);
+    }
+
+    .toc-card b {
+      display: block;
+      font: 900 11px/1 "JetBrains Mono", monospace;
+      color: var(--green);
+      margin-bottom: 5px;
+    }
+
+    .toc-card span {
+      display: block;
+      font: 900 14px/1.2 "Noto Sans SC", sans-serif;
+      margin-bottom: 4px;
+    }
+
+    .toc-card small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .doc-layout .content-stack {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .section-divider {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 2px;
+      color: var(--muted);
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+      content: "";
+      height: 2px;
+      background: var(--line);
+    }
+
+    .section-divider span {
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      background: #fffdf7;
+      padding: 8px 13px;
+      box-shadow: 4px 4px 0 rgba(27, 26, 23, .10);
+      font: 900 12px/1 "JetBrains Mono", monospace;
+      color: var(--ink);
+      white-space: nowrap;
     }
 
     .chapter {
@@ -748,10 +862,11 @@
     }
 
     .code-tabs {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(92px, max-content));
       gap: 8px;
-      flex-wrap: wrap;
       margin-bottom: 12px;
+      align-items: center;
     }
 
     .code-tab {
@@ -761,6 +876,9 @@
       padding: 8px 12px;
       font: 800 12px/1 "JetBrains Mono", monospace;
       cursor: pointer;
+      min-width: 92px;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .code-tab.active {
@@ -779,6 +897,16 @@
       font: 13px/1.62 "JetBrains Mono", monospace;
       tab-size: 2;
     }
+
+    pre code {
+      color: #fbf4e6;
+    }
+
+    .tok-keyword { color: #f3d27a; }
+    .tok-type { color: #8fc7ff; }
+    .tok-string { color: #bce2ce; }
+    .tok-comment { color: #9a9284; font-style: italic; }
+    .tok-number { color: #ffb08a; }
 
     .complexity {
       display: grid;
@@ -1002,26 +1130,54 @@
         grid-row: auto;
       }
 
+      .hero-title,
       .hero-copy,
       .hero-copy > p,
-      .hero-proof,
-      .hero-actions {
+      .hero-proof {
         grid-column: auto;
       }
 
       .hero-copy,
-      .hero, .lab-cluster, .main-grid, .complexity, .deep-grid, .range-scan {
+      .hero,
+      .lab-cluster,
+      .doc-layout,
+      .complexity,
+      .deep-grid,
+      .range-scan {
         grid-template-columns: 1fr;
       }
 
+      .machine,
+      .controls,
+      .doc-layout .content-stack,
+      .toc {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
       .controls {
+        grid-row: 1;
         position: static;
+      }
+
+      .machine {
+        grid-row: 2;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        border-right: 0;
+        border-top: 2px solid var(--line);
+        padding: 12px 0 0;
+        margin: 6px 0 0;
       }
     }
 
     @media (max-width: 760px) {
       .page {
-        width: min(100% - 20px, 1440px);
+        width: calc(100% - 32px);
+        max-width: 1440px;
       }
 
       .hero {
@@ -1030,7 +1186,58 @@
       }
 
       h1 {
-        font-size: 44px;
+        font-size: clamp(30px, 8.5vw, 38px);
+        max-width: 100%;
+      }
+
+      .kicker {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        text-align: center;
+        font-size: 11px;
+        line-height: 1.25;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+      .section-head p,
+      .proof-cell span,
+      .hero p {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .section-head p {
+        word-break: break-all;
+      }
+
+      .lab-cluster,
+      .controls,
+      .machine {
+        width: 100%;
+        max-width: calc(100vw - 32px);
+      }
+
+      .controls,
+      .machine {
+        justify-self: start;
+      }
+
+      .machine-top {
+        min-width: 0;
+      }
+
+      .machine-title {
+        flex: 0 0 auto;
+      }
+
+      .signal {
+        max-width: 58%;
+      }
+
+      .viz-wrap {
+        overflow-x: auto;
       }
 
       .machine-bottom,
@@ -1056,6 +1263,8 @@
       }
 
       #skipSvg {
+        width: 620px;
+        max-width: none;
         min-height: 330px;
       }
     }
@@ -1064,13 +1273,9 @@
 <body>
   <main class="page">
     <section class="hero" id="top">
-      <div class="hero-copy">
+      <div class="hero-title">
         <div class="kicker">probabilistic index / ordered structure</div>
         <h1>Skip List 跳表</h1>
-        <p>
-          跳表把一个有序链表升级成多层“快速通道”：底层保存全部元素，上层用随机抽样留下稀疏索引。
-          它用很少的局部指针维护，换来接近平衡树的 <strong>O(log n)</strong> 搜索、插入和删除。
-        </p>
         <div class="hero-proof" aria-label="跳表关键公式">
           <div class="proof-cell">
             <b>P(H ≥ k)=p^k</b>
@@ -1084,17 +1289,6 @@
             <b>update[i]</b>
             <span>插入和删除只改搜索路径附近的前驱指针。</span>
           </div>
-        </div>
-        <div class="hero-actions">
-          <a class="btn" href="#playground" aria-label="进入互动演示">
-            <span aria-hidden="true">▶</span> 互动演示
-          </a>
-          <a class="btn secondary" href="#implementation" aria-label="查看实现方式">
-            <span aria-hidden="true">⌘</span> 实现方式
-          </a>
-          <a class="btn secondary" href="#philosophy" aria-label="查看设计哲学">
-            <span aria-hidden="true">◆</span> 设计哲学
-          </a>
         </div>
       </div>
 
@@ -1124,7 +1318,7 @@
         <aside class="panel controls">
         <div class="section-head">
           <h2>实验台</h2>
-          <p>调整概率、最大层数和目标值，观察路径如何从最高层逐级逼近。</p>
+          <p>调整概率、层数和目标值，观察搜索路径。</p>
         </div>
         <div class="control-body">
           <div class="field">
@@ -1186,17 +1380,54 @@
             <div class="legend-item"><span class="swatch gold"></span><span>黄色：刚插入的新塔</span></div>
           </div>
         </div>
-      </aside>
+        </aside>
       </div>
-    </section>
 
-    <section class="main-grid">
-      <div class="content-stack">
-        <article class="chapter">
+      <div class="hero-copy">
+        <p>
+          跳表把一个有序链表升级成多层“快速通道”：底层保存全部元素，上层用随机抽样留下稀疏索引。
+          它用很少的局部指针维护，换来接近平衡树的 <strong>O(log n)</strong> 搜索、插入和删除。
+        </p>
+      </section>
+    </div>
+
+    <div class="section-divider" aria-hidden="true"><span>SKIP LIST NOTES</span></div>
+
+    <div class="doc-layout">
+      <nav class="toc" aria-label="页面目录">
+        <a class="toc-card" href="#purpose">
+          <b>01</b>
+          <span>目的</span>
+          <small>用概率给有序链表加索引。</small>
+        </a>
+        <a class="toc-card" href="#core">
+          <b>02</b>
+          <span>核心结构</span>
+          <small>搜索、插入、删除共用前驱路径。</small>
+        </a>
+        <a class="toc-card" href="#implementation">
+          <b>03</b>
+          <span>实现方式</span>
+          <small>Node、Search、Insert、Delete。</small>
+        </a>
+        <a class="toc-card" href="#complexity">
+          <b>04</b>
+          <span>复杂度</span>
+          <small>层高分布与 O(log n)。</small>
+        </a>
+        <a class="toc-card" href="#tradeoffs">
+          <b>05</b>
+          <span>设计取舍</span>
+          <small>局部修改、范围扫描、概率平衡。</small>
+        </a>
+      </nav>
+
+      <section class="content-stack">
+        <article class="chapter" id="purpose">
           <div class="chapter-header">
             <div class="chapter-number">01</div>
             <div>
-              <h2>核心机制</h2>
+              <h2>目的：用概率给有序链表加索引</h2>
               <p>跳表不是用旋转保持平衡，而是用概率把索引层做成“越来越稀疏的高速路”。</p>
             </div>
           </div>
@@ -1262,7 +1493,7 @@
           </div>
         </article>
 
-        <article class="chapter">
+        <article class="chapter" id="core">
           <div class="chapter-header">
             <div class="chapter-number">02</div>
             <div>
@@ -1332,7 +1563,7 @@
           </div>
         </article>
 
-        <article class="chapter">
+        <article class="chapter" id="complexity">
           <div class="chapter-header">
             <div class="chapter-number">04</div>
             <div>
@@ -1365,7 +1596,7 @@
           </div>
         </article>
 
-        <article class="chapter" id="philosophy">
+        <article class="chapter" id="tradeoffs">
           <div class="chapter-header">
             <div class="chapter-number">05</div>
             <div>
@@ -1851,8 +2082,41 @@ class SkipList {
       render();
     }
 
+    function escapeHtml(code) {
+      return code
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function highlightCode(code) {
+      let html = escapeHtml(code);
+      const tokens = [];
+      const stash = (value, className) => {
+        const id = `__TOK${String.fromCharCode(65 + tokens.length)}__`;
+        tokens.push({ id, value: `<span class="${className}">${value}</span>` });
+        return id;
+      };
+
+      html = html.replace(/\/\/.*$/gm, (match) => stash(match, "tok-comment"));
+      html = html.replace(/(&quot;.*?&quot;|&#039;.*?&#039;|`[\s\S]*?`)/g, (match) => stash(match, "tok-string"));
+      html = html.replace(/\b(class|constructor|const|let|this|return|if|for|while|new|null|true|false|break)\b/g, '<span class="tok-keyword">$1</span>');
+      html = html.replace(/\b(Node|SkipList|Array|Math|Number|Map|Promise|Infinity)\b/g, '<span class="tok-type">$1</span>');
+      html = html.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="tok-number">$1</span>');
+      tokens.forEach((token) => {
+        html = html.replace(token.id, token.value);
+      });
+      return html;
+    }
+
+    function setHighlightedCode(element, code) {
+      element.innerHTML = highlightCode(code);
+    }
+
     function setCode(name) {
-      codeBlock.textContent = codeSamples[name];
+      setHighlightedCode(codeBlock, codeSamples[name]);
       document.querySelectorAll(".code-tab").forEach((btn) => {
         btn.classList.toggle("active", btn.dataset.code === name);
       });
