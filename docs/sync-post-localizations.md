@@ -1,4 +1,4 @@
-# Sync Post Localizations
+# Sync Post Localizations Skill
 
 `sync-post-localizations` 用于在 Markdown 文章发生变化后，同步所有受支持语言的文章副本，并检查与文章耦合的路由、Metadata、导航、Sitemap 和 RSS/feed 行为。它安装在 Codex 的全局 Skills 目录后，可以作用于任意仓库，不绑定某个站点。
 

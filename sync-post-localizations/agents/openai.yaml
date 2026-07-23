@@ -1,4 +1,4 @@
 interface:
-  display_name: "Sync Post Localizations"
-  short_description: "Sync post translations and coupled site metadata"
+  display_name: "Sync Post Localizations Skill"
+  short_description: "Sync changed markdown posts and coupled site metadata across languages"
   default_prompt: "Use $sync-post-localizations to synchronize changed posts, generate every locale, validate the site, and publish the changes."
